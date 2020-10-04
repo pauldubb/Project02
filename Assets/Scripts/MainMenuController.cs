@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,5 +16,18 @@ public class MainMenuController : MonoBehaviour
         {
             AudioManager.Instance.PlaySong(_startingSong);
         }
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
+    }
+
+    public void ResetData()
+    {
+        PlayerPrefs.SetInt("HighScore", 0);
+        int highScore = PlayerPrefs.GetInt("HighScore");
+        _highScoreTextView.text = highScore.ToString();
     }
 }

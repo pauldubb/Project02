@@ -8,9 +8,14 @@ using UnityEngine.UI;
 public class Level01Controller : MonoBehaviour
 {
     [SerializeField] Text _currentScoreTextView;
+    
 
     int _currentScore;
+    
 
+    public GameObject menu;
+
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Q))
@@ -20,7 +25,9 @@ public class Level01Controller : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            ExitLevel();
+            menu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -39,5 +46,17 @@ public class Level01Controller : MonoBehaviour
     {
         _currentScore += scoreIncrease;
         _currentScoreTextView.text = "Score: " + _currentScore.ToString();
+    }
+
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ResumeGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
