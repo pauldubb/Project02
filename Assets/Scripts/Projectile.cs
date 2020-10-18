@@ -1,18 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HazardVolume : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    //project 2
     [SerializeField] AudioClip _damageSound = null;
     [SerializeField] AudioClip _deathSound = null;
-
-    private void Awake()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,18 +22,19 @@ public class HazardVolume : MonoBehaviour
             {
                 player.Damage();
                 AudioHelper.PlayClip2D(_damageSound, 1);
-            }
+                Destroy(gameObject);
+            }    
         }
+        
+        if(other.gameObject.name == "Plane")
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     void LoadDeath()
     {
         SceneManager.LoadScene("DeathScene");
-    }
-
-    void ReloadLevel()
-    {
-        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(activeSceneIndex);
     }
 }
