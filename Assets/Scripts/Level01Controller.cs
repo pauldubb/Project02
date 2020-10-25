@@ -1,28 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Level01Controller : MonoBehaviour
 {
-    [SerializeField] Text _currentScoreTextView;
-    
-
-    int _currentScore;
-    
-
     public GameObject menu;
-
+    public Player player;
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            IncreaseScore(5);
-        }
-
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             menu.SetActive(true);
@@ -34,20 +20,13 @@ public class Level01Controller : MonoBehaviour
     public void ExitLevel()
     {
         int highScore = PlayerPrefs.GetInt("HighScore");
-        if(_currentScore > highScore)
+        if(player.GetScore() > highScore)
         {
-            PlayerPrefs.SetInt("HighScore", _currentScore);
-            UnityEngine.Debug.Log("New high score: " + _currentScore);
+            PlayerPrefs.SetInt("HighScore", player.GetScore());
+            UnityEngine.Debug.Log("New high score: " + player.GetScore().ToString());
         }
         SceneManager.LoadScene("MainMenu");
     }
-
-    public void IncreaseScore(int scoreIncrease)
-    {
-        _currentScore += scoreIncrease;
-        _currentScoreTextView.text = "Score: " + _currentScore.ToString();
-    }
-
 
     public void QuitGame()
     {

@@ -81,11 +81,11 @@ public class EnemyAi : MonoBehaviour
         if(!alreadyAttacked)
         {
             ///Attack code here
-            AudioHelper.PlayClip2D(clip, 1);
+            AudioHelper.PlayClip2D(clip, .5f);
             GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
             Rigidbody rb = proj.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 6f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 5f, ForceMode.Impulse);
             Destroy(proj,2f);
             ///End of attack code
 

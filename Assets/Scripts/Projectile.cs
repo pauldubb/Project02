@@ -14,19 +14,18 @@ public class Projectile : MonoBehaviour
         {
             if (player.GetHealth() == 1)
             {
-                AudioHelper.PlayClip2D(_deathSound, 1);
-                player.Die();
-                DelayHelper.DelayAction(this, LoadDeath, 1f);
+                DontDestroyOnLoad(AudioHelper.PlayClip2D(_deathSound, .5f));
+                LoadDeath();
             }
             else
             {
                 player.Damage();
-                AudioHelper.PlayClip2D(_damageSound, 1);
+                AudioHelper.PlayClip2D(_damageSound, .5f);
                 Destroy(gameObject);
             }    
         }
         
-        if(other.gameObject.name == "Plane")
+        if(other.gameObject.layer == 8)
         {
             Destroy(gameObject);
         }

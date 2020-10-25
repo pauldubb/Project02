@@ -6,13 +6,7 @@ using UnityEngine.SceneManagement;
 public class HazardVolume : MonoBehaviour
 {
     //project 2
-    [SerializeField] AudioClip _damageSound = null;
     [SerializeField] AudioClip _deathSound = null;
-
-    private void Awake()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,17 +14,8 @@ public class HazardVolume : MonoBehaviour
 
         if (player != null)
         {
-            if (player.GetHealth() == 1)
-            {
-                AudioHelper.PlayClip2D(_deathSound, 1);
-                player.Die();
-                DelayHelper.DelayAction(this, LoadDeath, 1f);
-            }
-            else
-            {
-                player.Damage();
-                AudioHelper.PlayClip2D(_damageSound, 1);
-            }
+            DontDestroyOnLoad(AudioHelper.PlayClip2D(_deathSound, 1));
+            LoadDeath();
         }
     }
 
@@ -39,9 +24,4 @@ public class HazardVolume : MonoBehaviour
         SceneManager.LoadScene("DeathScene");
     }
 
-    void ReloadLevel()
-    {
-        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(activeSceneIndex);
-    }
 }
