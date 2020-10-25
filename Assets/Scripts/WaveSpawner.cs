@@ -91,11 +91,10 @@ public class WaveSpawner : MonoBehaviour
 
 		if (nextWave + 1 > waves.Length - 1)
 		{
-			waves[0].count+=3;
-			waves[1].count+=3;
-			waves[2].count+=3;
-			waves[3].count+=3;
-			waves[4].count+=3;
+			for(int i = 0; i<waves.Length;i++)
+            {
+				waves[i].count += 3;
+            }
 			nextWave = 0;
 			Debug.Log("ALL WAVES COMPLETE! Looping...");
 		}

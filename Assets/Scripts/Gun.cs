@@ -77,14 +77,4 @@ public class Gun : MonoBehaviour
     {
         ammo += ammoSet;
     }
-
-    private void AddRecoil()
-    {
-        transform.localEulerAngles += upRecoil;
-    }
-
-    private void StopRecoil()
-    {
-        transform.localEulerAngles = originalRotation;
-    }
 }
